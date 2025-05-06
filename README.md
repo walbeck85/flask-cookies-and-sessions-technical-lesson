@@ -1,27 +1,4 @@
-# Cookies in APIs
-
-## Learning Goals
-
-- Configure a Flask API to use cookies.
-- Use the developer tools to inspect cookies.
-
-***
-
-## Key Vocab
-
-- **Identity and Access Management (IAM)**: a subfield of software engineering that
-  focuses on users, their attributes, their login information, and the resources
-  that they are allowed to access.
-- **Authentication**: proving one's identity to an application in order to
-  access protected information; logging in.
-- **Authorization**: allowing or disallowing access to resources based on a
-  user's attributes.
-- **Session**: the time between a user logging in and logging out of a web
-  application.
-- **Cookie**: data from a web application that is stored by the browser. The
-  application can retrieve this data during subsequent sessions.
-
-***
+# Flask Cookies and Sessions Technical Lesson
 
 ## Introduction
 
@@ -29,9 +6,15 @@ Since cookies are such an important part of most web applications, Flask has
 excellent support for cookies and sessions baked in. To test these out, let's
 make a simple API to display our cookie and session data.
 
-***
+## Tools & Resources
 
-## Working With Sessions and Cookies
+- [GitHub Repo](https://github.com/learn-co-curriculum/flask-cookies-and-sessions-technical-lesson)
+- [API - Flask: class flask.session](https://flask.palletsprojects.com/en/2.2.x/api/#flask.session)
+- [Get and set cookies with Flask - pythonbasics.org](https://pythonbasics.org/flask-cookies/)
+- [SameSite Cookies Explained](https://web.dev/samesite-cookies-explained/)
+- [Chrome DevTools: Working With Cookies](https://developer.chrome.com/docs/devtools/storage/cookies/)
+
+## Set Up
 
 We've included some starter code for a Flask API application with this lesson so
 you can see a basic example of working with sessions and cookies. The
@@ -45,7 +28,17 @@ $ pipenv install && pipenv shell
 $ python server/app.py
 ```
 
-Then, in the browser, make a request to `http://localhost:5555/sessions/hello`.
+## Instructions
+
+### Task 1: Define the Problem
+
+### Task 2: Determine the Design
+
+### Task 3: Develop, Test, and Refine the Code
+
+#### Step 1: Working With Sessions and Cookies
+
+In the browser, make a request to `http://localhost:5555/sessions/hello`.
 This will run the code in our `show_session()` view function:
 
 ```py
@@ -83,8 +76,7 @@ The first time a user makes a request to this API, Flask will include the
 will instruct the browser to store these values in memory and send them with any
 future requests on this domain.
 
-![set-cookie headers](
-    https://curriculum-content.s3.amazonaws.com/python/python-p4-cookies-in-flask-api-1.png)
+![set-cookie headers](/assets/python-p4-cookies-in-flask-api-1.png)
 
 After making the request, you should see something like this in the browser:
 
@@ -116,8 +108,7 @@ developer tools, find the **Application** tab, and go to the **Cookies** section
 (under "Storage" in the pane on the left). There, you'll find all the cookies
 for our domain (`http://localhost:5555`):
 
-![cookies in dev tools](
-    https://curriculum-content.s3.amazonaws.com/python/python-p4-cookies-in-flask-api-2.png)
+![cookies in dev tools](/assets/python-p4-cookies-in-flask-api-2.png)
 
 Cookies can be edited directly in the dev tools. Try changing the value of the
 `mouse` key to something new. Then refresh the page in the browser to
@@ -125,7 +116,15 @@ make another request. If you try to edit the `session` cookie, on the other
 hand, it will have no effect thanks to Flask security features like signing and
 encryption.
 
-***
+### Task 4: Document and Maintain
+
+Best Practice documentation steps:
+* Add comments to the code to explain purpose and logic, clarifying intent and functionality of your code to other developers.
+* Update README text to reflect the functionality of the application following https://makeareadme.com. 
+  * Add screenshot of completed work included in Markdown in README.
+* Delete any stale branches on GitHub
+* Remove unnecessary/commented out code
+* If needed, update git ignore to remove sensitive data
 
 ## Conclusion
 
@@ -135,38 +134,4 @@ automatically passing additional data with each request using the headers. We
 can get a better sense of how cookies are being used by websites using the
 browser dev tools.
 
-***
-
-## Check For Understanding
-
-Before you move on, make sure you can answer the following questions:
-
-<details>
-  <summary>
-    <em>1. <code>session</code> is a unique object in Flask, but it stores
-        elements in key-value pairs. This makes it similar to what built-in data
-        structure?</em>
-  </summary>
-
-  <p>A dictionary.</p>
-</details>
-<br/>
-
-<details>
-  <summary>
-    <em>2. What are the two ways you can inspect a website's cookies using the
-        browser dev tools?</em>
-  </summary>
-
-  <p>The Network and Application tabs.</p>
-</details>
-<br/>
-
-## Resources
-
-- [API - Flask: class flask.session](https://flask.palletsprojects.com/en/2.2.x/api/#flask.session)
-- [Get and set cookies with Flask - pythonbasics.org](https://pythonbasics.org/flask-cookies/)
-- [SameSite Cookies Explained][same site cookies]
-- [Chrome DevTools: Working With Cookies](https://developer.chrome.com/docs/devtools/storage/cookies/)
-
-[same site cookies]: https://web.dev/samesite-cookies-explained/
+## Considerations
