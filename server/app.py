@@ -11,18 +11,21 @@ app.secret_key = b'?w\x85Z\x08Q\xbdO\xb8\xa9\xb65Kj\xa9_'
 @app.route('/sessions/<string:key>', methods=['GET'])
 def show_session(key):
     """
-    Initializes session keys for 'hello', 'goodnight', and 'count'.
-    Uses .get() to preserve values if they already exist.
-    Returns all current session data in a JSON response.
+    Initializes session keys and updates 'count' on repeated visits.
     """
-    # Initialize each session key safely
+
+    # Initialize keys safely if they don't already exist
     session["hello"] = session.get("hello") or "World"
     session["goodnight"] = session.get("goodnight") or "Moon"
     session["count"] = session.get("count") or 0
 
-    # Return a summary of current session state
+    # Increment count each time /sessions/count is visited
+    if key == "count":
+        session["count"] += 1
+
+    # Return current session state
     return jsonify({
-        "message": f"Session initialized for key: {key}",
+        "message": f"Session accessed for key: {key}",
         "session": {
             "hello": session["hello"],
             "goodnight": session["goodnight"],
