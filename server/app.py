@@ -11,27 +11,32 @@ app.secret_key = b'?w\x85Z\x08Q\xbdO\xb8\xa9\xb65Kj\xa9_'
 @app.route('/sessions/<string:key>', methods=['GET'])
 def show_session(key):
     """
-    Initializes session keys and updates 'count' on repeated visits.
+    Initializes session keys, updates 'count' if needed,
+    and returns both session and cookie data as JSON.
     """
 
-    # Initialize keys safely if they don't already exist
+    # Initialize session keys safely
     session["hello"] = session.get("hello") or "World"
     session["goodnight"] = session.get("goodnight") or "Moon"
     session["count"] = session.get("count") or 0
 
-    # Increment count each time /sessions/count is visited
+    # Increment count when /sessions/count is visited
     if key == "count":
         session["count"] += 1
 
-    # Return current session state
-    return jsonify({
-        "message": f"Session accessed for key: {key}",
+    # Build a response with detailed session + cookie info
+    response = make_response(jsonify({
         "session": {
-            "hello": session["hello"],
-            "goodnight": session["goodnight"],
-            "count": session["count"]
-        }
-    }), 200
+            "session_key": key,
+            "session_value": session[key],
+            "session_accessed": session.accessed,
+        },
+        "cookies": [
+            {cookie: request.cookies[cookie]} for cookie in request.cookies
+        ],
+    }), 200)
+
+    return response
 
 if __name__ == '__main__':
     app.run(port=5555)
