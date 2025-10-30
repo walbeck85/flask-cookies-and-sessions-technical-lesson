@@ -38,6 +38,17 @@ def show_session(key):
 
     return response
 
+@app.route('/crumbs', methods=['GET'])
+def crumbs():
+    """
+    Demonstrates manual cookie setting by setting a 'mouse' cookie.
+    """
+    response = make_response(jsonify({
+        "message": "Manual cookie has been set.",
+        "cookies": [{cookie: request.cookies[cookie]} for cookie in request.cookies],
+    }), 200)
+    response.set_cookie('mouse', 'Cookie')
+    return response
+
 if __name__ == '__main__':
     app.run(port=5555)
-    
